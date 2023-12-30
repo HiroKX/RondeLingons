@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Ronde des Lingons{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('build/images/img.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block stylesheets %}
+            {{ ux_controller_link_tags() }}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+{% if not app.user %}
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo" />
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('archive_index') }}">Historique</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('article_eng') }}">Engagement</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('article_reg') }}">Règlement</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('archive_doc') }}">Ronde {{ "now"|date("Y") }}</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% else %}
+    <nav class="navbar navbar-light navbar-expand-lg position-relative" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo" />
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-black" href="{{ path('admin_index') }}">Admin</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('archive_index') }}">Historique</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_eng') }}">Engagement</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_reg') }}">Règlement</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('archive_doc') }}">Ronde {{ "now"|date("Y") }}</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+
+{% if not app.user %}
+    <header class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="masthead carousel-item active" style="background-image: url({{ asset('build/images/imgCarousel1.jpg') }})">
+                <div class="container position-relative px-4 px-lg-5 legend">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>La Ronde des Lingons</h1>
+                                <span class="subheading">Rallye Historique</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="masthead carousel-item" style="background-image: url({{ asset('build/images/imgCarousel2.jpeg') }})">
+                <div class="container position-relative px-4 px-lg-5 legend">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>La Ronde des Lingons</h1>
+                                <span class="subheading">Rallye Historique</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="masthead carousel-item" style="background-image: url({{ asset('build/images/imgCarousel3.jpg') }})">
+                <div class="container position-relative px-4 px-lg-5 legend">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>La Ronde des Lingons</h1>
+                                <span class="subheading">Rallye Historique</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="masthead carousel-item" style="background-image: url({{ asset('build/images/imgCarousel4.jpg') }})">
+                <div class="container position-relative px-4 px-lg-5 legend">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>La Ronde des Lingons</h1>
+                                <span class="subheading">Rallye Historique</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endif %}
+    <div class="container-fluid">
+        {{ include('_flash_message.html.twig') }}
+        {% block body %}{% endblock %}
+    </div>
+</body>
+
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="{{ link_fb }}" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="small text-center text-muted fst-italic">Copyright &copy; Made with ♥ {{ "now"|date("Y") }} <a href="{{ path('login') }}">Connexion</a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script async src="https://umami.ronde-lingons.fr/script.js" data-website-id="f55f1deb-5348-49c3-bf55-61c7e01d262c"></script>
+</html>

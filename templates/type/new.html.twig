@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Type{% endblock %}
+
+{% block body %}
+    <div class="divperso mx-auto">
+    <h1>Créer un nouveau Type </h1>
+    {{ include('type/_form.html.twig') }}
+
+    <a href="{{ path('admin_types') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+<section>
+    <h3 class="text-center mb-3">Les derniers articles</h3>
+    <div class="row d-sm-block d-lg-flex">
+        {% for article in articles %}
+            <article class="col-10 col-lg-4 d-flex flex-column m-auto mb-3">
+                <h2 class="overflow-hidden">{{ article.titre }}</h2>
+                <div class="mt-auto">
+                <small>{{ article.utitre }}</small>
+                <div class="float-end">{{ article.dateAdd|date('d/m/Y') }}</div>
+                </div>
+                <a class="btn btn-outline-primary w-100 mt-auto" href="{{ path('article_show', {'id': article.id}) }}">Lire la suite...</a>
+            </article>
+        {% endfor %}
+    </div>
+</section>

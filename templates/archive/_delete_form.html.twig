@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('archive_delete', {'id': archive.id}) }}" class="d-inline" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ archive.id) }}">
+    <button class="btn btn-danger">Supprimer l'archive</button>
+</form>
+

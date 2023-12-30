@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.titre }}{% endblock %}
+
+{% import 'article/_macro_article.html.twig' as article_macro %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('carousel') }}
+{% endblock %}
+
+{% block body %}
+    <div class="mx-auto col-12 col-lg-9 align-items-center article">
+        <h3>{{ article.titre }}</h3>
+        <h5>{{ article.utitre }}</h5>
+        <div>{{ article.contenu | raw }}</div>
+        <ul class="breaking">
+            {% for attachment in article.files %}
+                <li><a href="{{ path('article_download_attachment', {'id': attachment.id}) }}">
+                        Document a télécharger : {{ attachment.originalFilename }}
+                    </a></li>
+            {% endfor %}
+        </ul>
+        {% if not article.images is empty  %}
+            {{ article_macro.display_image(article.images) }}
+        {% endif %}
+        {% if not article.imagesGallery is empty  %}
+        {{ article_macro.carousel(article.imagesGallery) }}
+        {% endif %}
+        {% if article.type.code == "RES" %}
+            <p>Les résultats ne sont pas définitifs, nous nous réservons le droit de changer les résultats à tout moment.</p>
+        {% endif %}
+        <div class="mt-2">
+            <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('carousel') }}
+{% endblock %}

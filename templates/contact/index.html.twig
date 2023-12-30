@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="divperso col-12 col-lg-9 mx-auto">
+        <p>Voici les différentes façons de nous contacter : </p>
+        <ul>
+            <li>
+                Par courriel : {{ email }}
+            </li>
+            <li>
+                Par facebook : <a href="{{ link_fb }}" target="_blank">Ronde des Lingons</a>
+            </li>
+        </ul>
+        <p>Ou bien par ce formulaire de contact : </p>
+        <div class="col-sm-12">
+                {{ form_start(form) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.message) }}
+            <button type="submit" class="btn btn-primary py-3 px-5">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
