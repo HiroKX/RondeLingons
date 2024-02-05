@@ -3,16 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Archive;
-use App\Entity\Article;
-use App\Form\ArchiveType;
 use App\Repository\ArchiveRepository;
 use App\Repository\ArticleRepository;
 use App\Service\AlertServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -38,9 +32,9 @@ class ArchiveController extends AbstractController
     }
 
     /**
+     * @param ArchiveRepository $achiveRepository
      * @param ArticleRepository $articleRepository
      * @return Response
-     * @throws ORMException
      */
     #[Route('/document', name: 'archive_doc', methods: ['GET'])]
     public function document(ArchiveRepository $achiveRepository,ArticleRepository $articleRepository): Response
@@ -55,30 +49,6 @@ class ArchiveController extends AbstractController
         return $this->render('archive/show.html.twig', [
             'archive' => $archive,
             'articles' => $article
-        ]);
-    }
-    /**
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[Route('/new', name: 'archive_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $archive = new Archive();
-        $form = $this->createForm(ArchiveType::class, $archive);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($archive);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('archive_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('archive/new.html.twig', [
-            'archive' => $archive,
-            'form' => $form,
         ]);
     }
 
@@ -97,46 +67,5 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param Archive $archive
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[IsGranted('ROLE_ADMIN')]
-    #[Route('/{id}/edit', name: 'archive_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Archive $archive, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(ArchiveType::class, $archive);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('archive_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('archive/edit.html.twig', [
-            'archive' => $archive,
-            'form' => $form,
-        ]);
-    }
-
-    /**
-     * @param Request $request
-     * @param Archive $archive
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[IsGranted('ROLE_ADMIN')]
-    #[Route('/{id}', name: 'archive_delete', methods: ['POST'])]
-    public function delete(Request $request, Archive $archive, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$archive->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($archive);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('archive_index', [], Response::HTTP_SEE_OTHER);
-    }
 }

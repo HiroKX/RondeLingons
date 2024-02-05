@@ -1,4 +1,3 @@
-import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -14,12 +13,9 @@ global.$ = global.jQuery = $;
 import '@popperjs/core';
 require('bootstrap');
 
-
-
 const routes = require('../public/js/fos_js_routes.json');
 import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 Routing.setRoutingData(routes);
-
 
 let nbLoad=1;
 let scrollPos = 0;
@@ -56,61 +52,6 @@ window.addEventListener('scroll', function() {
     }
     scrollPos = currentTop;
 });
-
-updateAttachments();
-registerAttachmentsEvents();
-registerAttachmentsForm();
-
-// Collection Article Images
-function updateAttachments() {
-    $('.collection-attachments .attachment').each(function () {
-        let fileName = $(this).data('fileName');
-        $(this).find('label').html(fileName);
-    });
-}
-
-function registerAttachmentsEvents() {
-    // Ajout PJ
-    $('.add-attachment').one('click', function (e) {
-        let $collectionHolder = $('.collection-attachments').first();
-
-        // CHECK limite MAX nombre de fichiers atteinte
-        /*if ($($collectionHolder).find('.attachment').length === 4) {
-            $('#collapseAttachement .invalid-feedback').show();
-            return;
-        }*/
-
-        let prototype = $collectionHolder.data('prototype');
-        let index = $collectionHolder.data('index');
-
-        let newForm = prototype.replace(/__name__/g, index);
-        $collectionHolder.data('index', index + 1);
-
-        let $newForm = $(newForm);
-        $collectionHolder.append($newForm);
-
-        registerAttachmentsEvents();
-    });
-
-    // Suppression PJ
-    $('.remove-attachment').one('click', function (e) {
-        $(this).closest('.attachment').remove();
-    });
-}
-
-function registerAttachmentsForm() {
-    $('.collection-attachments').closest('form').submit(function (event) {
-        $('.collection-attachments input[type="file"]').each(function () {
-            // Suppression champ PJ ajouté mais sans upload associé
-            // car provoquerait une erreur côté serveur si submit
-            let filename = $(this).closest('.attachment').data('fileName');
-            if (this.files.length === 0 && filename === '') {
-                $(this).closest('.attachment').remove();
-            }
-        });
-    });
-}
-
 
 
 $('#btn-load').click(loadArticle);
@@ -156,4 +97,3 @@ function loadArticle() {
 }
 
 
-console.debug('app.js loaded');

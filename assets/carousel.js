@@ -1,13 +1,24 @@
 import './styles/carousel.scss';
-import Swiper, { Navigation, Pagination, Lazy } from 'swiper';
+import Swiper from 'swiper';
+import { Navigation, Pagination, Lazy, EffectCoverflow } from 'swiper/modules';
 
-Swiper.use([Navigation, Pagination, Lazy]);
+Swiper.use([Navigation, Pagination, Lazy, EffectCoverflow]);
 
+console.log('swiper loaded')
 new Swiper('.swiper', {
     // Optional parameters
-    direction: 'horizontal',
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+    },
     loop: true,
-    autoHeight: true,
     preloadImages: false,
     // Enable lazy loading
     lazy: {

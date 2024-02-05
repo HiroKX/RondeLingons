@@ -1,0 +1,19 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% set values = field.formattedValue %}
+{% if values is not iterable %}
+    {% set values = [field.formattedValue] %}
+{% endif %}
+{% if ea.crud.currentPage == "index" %}
+    {% set values = values|slice(0,1) %}
+{% endif %}
+{% for value in values %}
+    {% set _lightbox_id = value|md5 %}
+    <a href="#" class="ea-lightbox-thumbnail" data-featherlight="#{{ _lightbox_id }}" data-featherlight-close-on-click="anywhere">
+        <img src="{{ asset(value) }}" class="img-fluid">
+    </a>
+    <div id="{{ _lightbox_id }}" class="ea-lightbox">
+        <img src="{{ asset(value) }}">
+    </div>
+{% endfor %}

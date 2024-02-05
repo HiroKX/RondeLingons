@@ -35,6 +35,10 @@ class Type
         $this->articles = new ArrayCollection();
     }
 
+    public function __toString(){
+        return $this->nom;
+    }
+
     /**
      * @return string|null
      */

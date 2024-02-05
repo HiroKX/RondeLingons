@@ -16,8 +16,8 @@
         <div>{{ article.contenu | raw }}</div>
         <ul class="breaking">
             {% for attachment in article.files %}
-                <li><a href="{{ path('article_download_attachment', {'id': attachment.id}) }}">
-                        Document a télécharger : {{ attachment.originalFilename }}
+                <li><a href="{{ path('article_download_attachment', {'filename': attachment}) }}">
+                        Document a télécharger : {{ attachment }}
                     </a></li>
             {% endfor %}
         </ul>
@@ -25,7 +25,7 @@
             {{ article_macro.display_image(article.images) }}
         {% endif %}
         {% if not article.imagesGallery is empty  %}
-        {{ article_macro.carousel(article.imagesGallery) }}
+            {{ article_macro.carousel(article.imagesGallery) }}
         {% endif %}
         {% if article.type.code == "RES" %}
             <p>Les résultats ne sont pas définitifs, nous nous réservons le droit de changer les résultats à tout moment.</p>
