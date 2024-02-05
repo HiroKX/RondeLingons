@@ -42,22 +42,18 @@ class Article
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $dateAdd;
 
-    #[ORM\OneToMany(mappedBy: 'articleFiles', targetEntity: Attachment::class, cascade: ['persist'])]
-    private $files;
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $files = null;
 
-    #[ORM\OneToMany(mappedBy: 'articleImages', targetEntity: Attachment::class, cascade: ['persist'])]
-    private $images;
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $images = null;
 
-    #[ORM\OneToMany(mappedBy: 'articleImagesGallery', targetEntity: Attachment::class, cascade: ['persist'])]
-    private $imagesGallery;
-
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $imagesGallery = null;
 
     public function __construct()
     {
         $this->dateAdd = new \DateTime();
-        $this->files = new ArrayCollection();
-        $this->images = new ArrayCollection();
-        $this->imagesGallery = new ArrayCollection();
     }
 
     /**
@@ -182,127 +178,41 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection|Attachment[]
-     */
-    public function getFiles(): Collection
+    public function getFiles(): ?array
     {
         return $this->files;
     }
 
-    public function addFile(Attachment $file): self
+    public function setFiles(?array $files): static
     {
-        if (!$this->files->contains($file)) {
-            $this->files[] = $file;
-            $file->setArticleFiles($this);
-        }
+        $this->files = $files;
 
         return $this;
     }
 
-    public function cleanFiles(): self
-    {
-        $this->files = [];
-        return $this;
-    }
-
-
-    public function removeFile(Attachment $file): self
-    {
-        if ($this->files->removeElement($file)) {
-            // set the owning side to null (unless already changed)
-            if ($file->getArticleFiles() === $this) {
-                $file->setArticleFiles(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Attachment[]
-     */
-    public function getImages(): Collection
+    public function getImages(): ?array
     {
         return $this->images;
     }
 
-    public function addImage(Attachment $image): self
+    public function setImages(?array $images): static
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setArticleImages($this);
-        }
+        $this->images = $images;
 
         return $this;
     }
 
-    public function removeImage(Attachment $image): self
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getArticleImages() === $this) {
-                $image->setArticleImages(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Attachment[]
-     */
-    public function getImagesGallery(): Collection
+    public function getImagesGallery(): ?array
     {
         return $this->imagesGallery;
     }
 
-    public function addImagesGallery(Attachment $imagesGallery): self
+    public function setImagesGallery(?array $imagesGallery): static
     {
-        if (!$this->imagesGallery->contains($imagesGallery)) {
-            $this->imagesGallery[] = $imagesGallery;
-            $imagesGallery->setArticleImagesGallery($this);
-        }
+        $this->imagesGallery = $imagesGallery;
 
         return $this;
     }
 
-    public function removeImagesGallery(Attachment $imagesGallery): self
-    {
-        if ($this->imagesGallery->removeElement($imagesGallery)) {
-            // set the owning side to null (unless already changed)
-            if ($imagesGallery->getArticleImagesGallery() === $this) {
-                $imagesGallery->setArticleImagesGallery(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function removeAttachment(Attachment $attachment)
-    {
-        $fileArray = $this->getFiles()->toArray();
-        $imageArray = $this->getImages()->toArray();
-        $imageGalArray = $this->getImagesGallery()->toArray();
-        if(count($fileArray)){
-            if(array_search($attachment,$fileArray) || $fileArray[0]->getId() == $attachment->getId()){
-                $this->removeFile($attachment);
-            }
-        }
-
-        if(count($imageArray)){
-            if(array_search($attachment,$imageArray) || $imageArray[0]->getId() == $attachment->getId()){
-                $this->removeImage($attachment);
-            }
-        }
-
-        if(count($imageGalArray)){
-            if(array_search($attachment,$imageGalArray) || $imageGalArray[0]->getId() == $attachment->getId()){
-                $this->removeImagesGallery($attachment);
-            }
-        }
-
-        return $this;
-    }
 
 }

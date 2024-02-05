@@ -15,10 +15,6 @@
                             <h5 class="card-title">{{ archive.denom | raw}}</h5>
                             <p class="card-text">{{ archive.annee | raw}}</p>
                             <a href="{{ path('archive_show',{'id':archive.id}) }}" class="btn btn-primary">En savoir plus !</a>
-                            {% if app.user %}
-                                <a href="{{ path('archive_edit',{'id':archive.id}) }}" class="btn btn-warning">Modifier l'archive</a>
-                                {{ include('archive/_delete_form.html.twig') }}
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -27,9 +23,6 @@
             <p> Pas d'archive trouvé.</p>
         {% endfor %}
     </div>
-    {% if app.user %}
-    <a href="{{ path('archive_new') }}" class="btn btn-primary">Créer une archive</a>
-    {% endif %}
 </div>
 
 

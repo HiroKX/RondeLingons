@@ -29,12 +29,39 @@ class ArticleCrudController extends AbstractCrudController
         return [
             AssociationField::new('type','Type d\'article'),
             AssociationField::new('annee','Edition'),
-            TextField::new('files')->setFormType(AttachmentType::class)->onlyOnForms(),
-            CollectionField::new('images')->setEntryType(MultipleAttachmentType::class)->onlyOnForms(),
-            CollectionField::new('imagesGallery')->setEntryType(MultipleAttachmentType::class)->onlyOnForms(),
             TextField::new('titre'),
             TextField::new('utitre','Sous-titre'),
             TextEditorField::new('contenu','Contenu'),
+            ImageField::new('files')
+                ->setFormTypeOptions([
+                    "multiple" => true,
+                    "attr" => [
+                        "accept" => "image/x-png,image/pdg,image/jpeg,application/pdf"
+                    ],
+                ])
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern("[randomhash].[extension]"),
+            ImageField::new('images')
+                ->setFormTypeOptions([
+                    "multiple" => true,
+                    "attr" => [
+                        "accept" => "image/x-png,image/gif,image/jpeg"
+                    ],
+                ])
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern("[randomhash].[extension]"),
+            ImageField::new('imagesGallery')
+                ->setFormTypeOptions([
+                    "multiple" => true,
+                    "attr" => [
+                        "accept" => "image/x-png,image/gif,image/jpeg"
+                    ],
+                ])
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern("[randomhash].[extension]"),
         ];
     }
 

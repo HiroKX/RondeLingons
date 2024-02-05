@@ -23,20 +23,27 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    private FileUploadServiceInterface $uploaderService;
     private EntityManagerInterface $entityManager;
     private AlertServiceInterface $alertService;
 
     /**
-     * @param FileUploadServiceInterface $uploaderService
      * @param EntityManagerInterface $entityManager
      * @param AlertServiceInterface $alertService
      */
-    public function __construct(FileUploadServiceInterface $uploaderService, EntityManagerInterface $entityManager, AlertServiceInterface $alertService)
+    public function __construct(EntityManagerInterface $entityManager, AlertServiceInterface $alertService)
     {
-        $this->uploaderService = $uploaderService;
         $this->entityManager = $entityManager;
         $this->alertService = $alertService;
+    }
+
+    /**
+     * @param string $pathAttachmentArticle
+     * @return Response
+     */
+    #[Route('/download/attachment/{filename}', name: 'article_download_attachment')]
+    public function downloadAttachment(String $filename): Response
+    {
+        return $this->file('uploads/' . $filename);
     }
 
     /**
@@ -49,19 +56,6 @@ class ArticleController extends AbstractController
     {
         return $this->showArticle(Type::CODE_REGLEMENT, $articleRepository);
     }
-
-
-    /**
-     * @param string $pathAttachmentArticle
-     * @param Attachment $attachment
-     * @return Response
-     */
-    #[Route('/download/attachment/{id}', name: 'article_download_attachment')]
-    public function downloadAttachment(string $pathAttachmentArticle, Attachment $attachment): Response
-    {
-        return $this->file($pathAttachmentArticle . $attachment->getFilename());
-    }
-
 
     /**
      * @param ArticleRepository $articleRepository

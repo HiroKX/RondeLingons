@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -25,6 +26,7 @@ class DashboardController extends AbstractDashboardController
 
 
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -90,6 +92,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Articles','fa fa-article', Article::class);
         yield MenuItem::linkToCrud('Types d\'articles','fa fa-article', Type::class);
         yield MenuItem::linkToCrud('Archives','fa fa-article', Archive::class);
+        yield MenuItem::linkToRoute('Revenir à l\'accueil','fa fa-article','index');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
