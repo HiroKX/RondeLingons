@@ -34,7 +34,7 @@ class UserAdminCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('email', InputArgument::REQUIRED, 'Email of user')
+            ->addArgument('username', InputArgument::REQUIRED, 'Username of user')
             ->addArgument('password', InputArgument::REQUIRED, 'Password of user')
         ;
     }
@@ -45,16 +45,16 @@ class UserAdminCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $email = $input->getArgument('email');
+        $username = $input->getArgument('username');
         $password = $input->getArgument('password');
 
-        if (!$email && !$password) {
+        if (!$username && !$password) {
             $io->error('The command requires the email and password to create the user. Please check the information.');
             return Command::FAILURE;
         }
 
         $admin = new Admin();
-        $admin->setUsername($email);
+        $admin->setUsername($username);
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->passwordHasher->hashPassword($admin, $password));
 
