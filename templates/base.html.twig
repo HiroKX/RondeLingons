@@ -6,11 +6,13 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('build/images/img.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
             {{ ux_controller_link_tags() }}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
     {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
 {% block importmap %}{{ importmap('app') }}{% endblock %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}

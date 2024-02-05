@@ -4,9 +4,10 @@ namespace App\Entity;
 
 use App\Repository\AttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
+#[Vich\Uploadable]
 class Attachment{
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,15 +15,16 @@ class Attachment{
     private int $id = 0;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $originalFilename;
+    private string $originalFilename= "daz";
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $filename;
+    private string $filename = "dza";
 
     #[ORM\Column(type: 'integer')]
-    private int $taille;
+    private int $taille = 0;
 
-    private ?UploadedFile $file = null;
+    #[Vich\UploadableField(mapping: 'article', fileNameProperty: 'filename', size: 'taille')]
+    private $file = null;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'files')]
     private $articleFiles;
@@ -37,6 +39,11 @@ class Attachment{
     public function setId(int $id):void
     {
         $this->id = $id;
+    }
+
+    public function __toString():string
+    {
+        return $this->filename;
     }
 
     /**
@@ -104,19 +111,14 @@ class Attachment{
         return $this;
     }
 
-    /**
-     * @return UploadedFile|null
-     */
-    public function getFile(): ?UploadedFile
+
+    public function getFile()
     {
         return $this->file;
     }
 
-    /**
-     * @param UploadedFile $file
-     * @return $this
-     */
-    public function setFile(UploadedFile $file): self
+
+    public function setFile($file): self
     {
         $this->file = $file;
 

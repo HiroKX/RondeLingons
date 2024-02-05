@@ -24,7 +24,7 @@ use function PHPUnit\Framework\isNull;
  * Created by HiroKX
  * 18/Jan/2022
  */
-#[ROUTE('/admin')]
+#[ROUTE('/admien')]
 #[IsGranted('ROLE_ADMIN')]
 class AdminController extends AbstractController
 {
@@ -121,7 +121,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('article/edit.html.twig', [
+        return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form,
         ]);
@@ -153,7 +153,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('article/new.html.twig', [
+        return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form,
         ]);

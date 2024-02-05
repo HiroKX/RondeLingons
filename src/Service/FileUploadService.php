@@ -20,7 +20,7 @@ class FileUploadService implements FileUploadServiceInterface
      * @param SluggerInterface $slugger
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(string $targetDirectory, SluggerInterface $slugger, EntityManagerInterface $entityManager)
+    public function __construct(SluggerInterface $slugger, EntityManagerInterface $entityManager, string $targetDirectory= "test")
     {
         $this->targetDirectory = $targetDirectory;
         $this->slugger = $slugger;

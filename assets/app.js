@@ -1,4 +1,3 @@
-import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -14,12 +13,9 @@ global.$ = global.jQuery = $;
 import '@popperjs/core';
 require('bootstrap');
 
-
-
 const routes = require('../public/js/fos_js_routes.json');
 import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 Routing.setRoutingData(routes);
-
 
 let nbLoad=1;
 let scrollPos = 0;

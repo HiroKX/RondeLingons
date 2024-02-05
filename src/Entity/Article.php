@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -41,13 +42,13 @@ class Article
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $dateAdd;
 
-    #[ORM\OneToMany(mappedBy: 'articleFiles', targetEntity: Attachment::class)]
+    #[ORM\OneToMany(mappedBy: 'articleFiles', targetEntity: Attachment::class, cascade: ['persist'])]
     private $files;
 
-    #[ORM\OneToMany(mappedBy: 'articleImages', targetEntity: Attachment::class)]
+    #[ORM\OneToMany(mappedBy: 'articleImages', targetEntity: Attachment::class, cascade: ['persist'])]
     private $images;
 
-    #[ORM\OneToMany(mappedBy: 'articleImagesGallery', targetEntity: Attachment::class)]
+    #[ORM\OneToMany(mappedBy: 'articleImagesGallery', targetEntity: Attachment::class, cascade: ['persist'])]
     private $imagesGallery;
 
 
@@ -198,6 +199,13 @@ class Article
 
         return $this;
     }
+
+    public function cleanFiles(): self
+    {
+        $this->files = [];
+        return $this;
+    }
+
 
     public function removeFile(Attachment $file): self
     {

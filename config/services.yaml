@@ -4,7 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    upload: 'uploads/'
+    fb: 'https://www.facebook.com/rallye.deslingons'
+    email.address: 'car-langres@orange.fr'
+    sender.email: 'r.lagler@laposte.net'
+    receiver.email: 'contact.rondelingons@gmail.com'
 services:
     # default configuration for services in *this* file
     _defaults:

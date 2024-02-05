@@ -1,5 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        pathArticleAttachment: '%upload%'
+        link_fb: '%fb%'
+        email: '%email.address%'
 
 when@test:
     twig:

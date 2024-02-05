@@ -31,6 +31,10 @@ class Archive
         $this->articles = new ArrayCollection();
     }
 
+    public function __toString(){
+        return $this->denom;
+    }
+
     /**
      * @return int|null
      */
