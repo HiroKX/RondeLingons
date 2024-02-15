@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('about/about.html.twig',{'articles':articles}) }}
+
+    {{ include('about/presentation.html.twig',{'articles':articles}) }}
+
+    {{ include('article/_last_article.html.twig',{'articles':articles}) }}
+{% endblock %}

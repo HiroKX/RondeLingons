@@ -16,11 +16,12 @@ class IndexController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository,TypeRepository $typeRepository): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findBy([],['dateAdd' => 'DESC'],10,3),
-            'types' => $typeRepository->findAll(),
+        $articles = $articleRepository->findBy([],['dateAdd' => 'DESC'], 3);
+
+        return $this->render('index.html.twig',[
+            'articles' => $articles
         ]);
     }
 
@@ -28,12 +29,14 @@ class IndexController extends AbstractController
      * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function lastArticle(ArticleRepository $articleRepository): Response
+    #[Route('/articles', name: 'index', methods: ['GET'])]
+    public function articles(ArticleRepository $articleRepository): Response
     {
-        $articles = $articleRepository->findBy([],['dateAdd' => 'DESC'], 3);
+        $articles = $articleRepository->findAll();
 
-        return $this->render('article/_last_article.html.twig', [
-            'articles' => $articles,
+        return $this->render('article/index.html.twig',[
+            'articles' => $articles
         ]);
     }
+
 }
