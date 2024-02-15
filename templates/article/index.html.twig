@@ -2,71 +2,24 @@
 
 {% import 'article/_macro_article.html.twig' as article_macro %}
 {% block body %}
-
-    <div class="flex flex-wrap mb-24 -mx-3">
-        <div class="w-full pr-2 lg:w-1/4 lg:block">
-            <div class="p-4 mb-5 bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-900">
-                {{ datalist_filters(articles) }}
-            </div>
-
+    <div class="flex flex-row">
+        <!-- Conteneur pour les filtres -->
+        <div class="w-1/4">
+            {{ datalist_filters(articles) }}
         </div>
-        <div class="w-full px-3 lg:w-3/4">
-            <div class="px-3 mb-4">
-                <div class="items-center justify-between hidden px-3 py-2 bg-gray-100 md:flex dark:bg-gray-900 ">
-                    <div class="flex">
-
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="pr-3 border-r border-gray-300">
-                            <select name="" id="" class="block w-40 text-base bg-gray-100 cursor-pointer dark:text-gray-400 dark:bg-gray-900">
-                                <option value="">Sort by latest</option>
-                                <option value="">Sort by Popularity</option>
-                                <option value="">Sort by Price</option>
-                            </select>
-                        </div>
-                        <div class="flex items-center pl-3">
-                            <p class="text-xs text-gray-400">Show</p>
-                            <div class="px-2 py-2 text-xs text-gray-500 ">
-                                <select name="" id="" class="block text-base bg-gray-100 cursor-pointer w-11 dark:text-gray-400 dark:bg-gray-900">
-                                    <option value="">15</option>
-                                    <option value="">17</option>
-                                    <option value="">19</option>
-                                </select>
+        <div class="w-3/4">
+            <div class="flex">
+                <div class="flex flex-wrap">
+                    <section class="flex bg-gray-100 dark:bg-gray-800">
+                        <div class="p-4 mx-auto sm:w-full lg:w-full">
+                            <div class="grid grid-cols-1 gap-4 lg:gap-8 sm:gap-4 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3">
+                                {% for article in articles %}
+                                    {{ article_macro.article_index(article) }}
+                                {% endfor %}
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
-            </div>
-            <div class="flex flex-wrap items-center ">
-                {% for article in articles %}
-                    {{ article_macro.article_index(article) }}
-                {% endfor %}
-            </div>
-            <div class="flex justify-end mt-6">
-                <nav aria-label="page-navigation">
-                    <ul class="flex list-style-none">
-                        <li class="page-item disabled ">
-                            <a href="#" class="relative block pointer-events-none px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300  rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-600">Previous
-                            </a>
-                        </li>
-                        <li class="page-item ">
-                            <a href="#" class="relative block px-3 py-1.5 mr-3 text-base hover:text-blue-700 transition-all duration-300 hover:bg-blue-200 dark:hover:text-gray-400 dark:hover:bg-gray-700 rounded-md text-gray-100 bg-blue-400">1
-                            </a>
-                        </li>
-                        <li class="page-item ">
-                            <a href="#" class="relative block px-3 py-1.5 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md mr-3  ">2
-                            </a>
-                        </li>
-                        <li class="page-item ">
-                            <a href="#" class="relative block px-3 py-1.5 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md mr-3 ">3
-                            </a>
-                        </li>
-                        <li class="page-item ">
-                            <a href="#" class="relative block px-3 py-1.5 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md ">Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>

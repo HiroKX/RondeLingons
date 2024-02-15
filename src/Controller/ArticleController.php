@@ -43,7 +43,7 @@ class ArticleController extends AbstractController
 
         $datalist = $this->datalistFactory
             ->createBuilder(ArticleDatalistType::class, [
-                'limit_per_page' => 10,
+                'limit_per_page' => 9,
             ])
             ->getDatalist();
 
