@@ -1,10 +1,9 @@
 import './styles/carousel.scss';
 import Swiper from 'swiper';
-import { Navigation, Pagination, Lazy, EffectCoverflow } from 'swiper/modules';
+import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 
-Swiper.use([Navigation, Pagination, Lazy, EffectCoverflow]);
+Swiper.use([Navigation, Pagination, EffectCoverflow]);
 
-console.log('swiper loaded')
 new Swiper('.swiper', {
     // Optional parameters
     effect: "coverflow",
