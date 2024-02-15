@@ -56,6 +56,18 @@
             "config/routes/fos_js_routing.yaml"
         ]
     },
+    "leapt/core-bundle": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.2",
+            "ref": "3a70ffc856464fc26a5d421983a84e2fc64a55fe"
+        },
+        "files": [
+            "config/packages/leapt_core.yaml"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {

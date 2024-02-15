@@ -25,18 +25,4 @@ class IndexController extends AbstractController
         ]);
     }
 
-    /**
-     * @param ArticleRepository $articleRepository
-     * @return Response
-     */
-    #[Route('/articles', name: 'index', methods: ['GET'])]
-    public function articles(ArticleRepository $articleRepository): Response
-    {
-        $articles = $articleRepository->findAll();
-
-        return $this->render('article/index.html.twig',[
-            'articles' => $articles
-        ]);
-    }
-
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "483a58294e9a7772fa8761f60bcb9856",
+    "content-hash": "9a1b31c3f04025eb71a7dfc81f26bbd3",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1784,6 +1784,87 @@
                 "source": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/tree/3.5.0"
             },
             "time": "2024-01-23T21:30:47+00:00"
+        },
+        {
+            "name": "leapt/core-bundle",
+            "version": "v5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leapt/core-bundle.git",
+                "reference": "ba1d6792219791eddd3e3ca7b257208172b66543"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leapt/core-bundle/zipball/ba1d6792219791eddd3e3ca7b257208172b66543",
+                "reference": "ba1d6792219791eddd3e3ca7b257208172b66543",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.10 || ^3.0",
+                "php": "^8.2",
+                "symfony/form": "^6.4 || ^7.0",
+                "symfony/framework-bundle": "^6.4 || ^7.0",
+                "symfony/http-foundation": "^6.4 || ^7.0",
+                "symfony/http-kernel": "^6.4 || ^7.0",
+                "symfony/mime": "^6.4 || ^7.0",
+                "symfony/routing": "^6.4 || ^7.0",
+                "symfony/translation": "^6.4 || ^7.0",
+                "symfony/twig-bundle": "^6.4 || ^7.0",
+                "symfony/validator": "^6.4 || ^7.0",
+                "twig/twig": "^3.0"
+            },
+            "require-dev": {
+                "doctrine/data-fixtures": "^1.6",
+                "doctrine/persistence": "^3.2",
+                "easycorp/easyadmin-bundle": "^4.8.5",
+                "endroid/qr-code": "^4.8 || ^5.0",
+                "fakerphp/faker": "^1.23",
+                "friendsofphp/php-cs-fixer": "^3.49.0",
+                "google/recaptcha": "^1.3",
+                "league/flysystem-bundle": "^3.0",
+                "phpstan/phpstan": "^1.10.57",
+                "phpstan/phpstan-deprecation-rules": "^1.1.4",
+                "phpunit/phpunit": "^10.5.10",
+                "symfony/browser-kit": "^6.4 || ^7.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Leapt\\CoreBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Vanliefland",
+                    "email": "pierre@snowcap.be"
+                },
+                {
+                    "name": "Edwin Hermans",
+                    "email": "edwin@snowcap.be"
+                },
+                {
+                    "name": "Jérôme Poskin",
+                    "email": "jerome@snowcap.be"
+                },
+                {
+                    "name": "Snowcap",
+                    "homepage": "https://www.snowcap.be"
+                }
+            ],
+            "description": "Symfony LeaptCoreBundle",
+            "homepage": "https://github.com/leapt/core-bundle",
+            "keywords": [
+                "utility"
+            ],
+            "support": {
+                "issues": "https://github.com/leapt/core-bundle/issues",
+                "source": "https://github.com/leapt/core-bundle/tree/v5.1.0"
+            },
+            "time": "2024-02-08T07:43:45+00:00"
         },
         {
             "name": "monolog/monolog",

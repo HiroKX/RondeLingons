@@ -2,20 +2,17 @@
 
 namespace App\Controller;
 
+use App\Dtalist\Type\ArticleDatalistType;
 use App\Entity\Article;
-use App\Entity\Attachment;
 use App\Entity\Type;
-use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Service\AlertServiceInterface;
-use App\Service\FileUploadServiceInterface;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\Exception\ORMException;
+use Leapt\CoreBundle\Datalist\Datalist;
+use Leapt\CoreBundle\Datalist\DatalistFactory;
+use Leapt\CoreBundle\Datalist\Datasource\DoctrineORMDatasource;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,18 +20,42 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private AlertServiceInterface $alertService;
+
+    public function __construct(private ArticleRepository $articleRepository,private AlertServiceInterface $alertService, private readonly DatalistFactory $datalistFactory, private EntityManagerInterface $entityManager){
+    }
 
     /**
-     * @param EntityManagerInterface $entityManager
-     * @param AlertServiceInterface $alertService
+     * @param ArticleRepository $articleRepository
+     * @return Response
      */
-    public function __construct(EntityManagerInterface $entityManager, AlertServiceInterface $alertService)
+    #[Route('/', name: 'article_index', methods: ['GET'])]
+    public function articles(Request $request): Response
     {
-        $this->entityManager = $entityManager;
-        $this->alertService = $alertService;
+        return $this->render('article/index.html.twig',[
+            'articles' => $this->getDatalist($request)
+        ]);
     }
+
+    private function getDatalist(Request $request): Datalist
+    {
+        $queryBuilder = $this->articleRepository->createQueryBuilder('n')
+        ->orderBy('n.dateAdd', 'DESC');
+
+        $datalist = $this->datalistFactory
+            ->createBuilder(ArticleDatalistType::class, [
+                'limit_per_page' => 10,
+            ])
+            ->getDatalist();
+
+        $datalist->setRoute($request->attributes->get('_route'))
+            ->setRouteParams($request->query->all());
+        $datasource = new DoctrineORMDatasource($queryBuilder);
+        $datalist->setDatasource($datasource);
+        $datalist->bind($request);
+
+        return $datalist;
+    }
+
 
     /**
      * @param string $pathAttachmentArticle
@@ -52,9 +73,9 @@ class ArticleController extends AbstractController
      * @throws ORMException
      */
     #[Route('/reglement', name: 'article_reg', methods: ['GET'])]
-    public function reglement(ArticleRepository $articleRepository): Response
+    public function reglement(): Response
     {
-        return $this->showArticle(Type::CODE_REGLEMENT, $articleRepository);
+        return $this->showArticle(Type::CODE_REGLEMENT);
     }
 
     /**
@@ -63,9 +84,9 @@ class ArticleController extends AbstractController
      * @throws ORMException
      */
     #[Route('/engagement', name: 'article_eng', methods: ['GET'])]
-    public function engagement(ArticleRepository $articleRepository): Response
+    public function engagement(): Response
     {
-        return $this->showArticle(Type::CODE_ENGAGEMENT, $articleRepository);
+        return $this->showArticle(Type::CODE_ENGAGEMENT);
     }
 
     /**
@@ -74,10 +95,10 @@ class ArticleController extends AbstractController
      * @return Response
      * @throws ORMException
      */
-    private function showArticle(string $codeType, ArticleRepository $articleRepository): Response
+    private function showArticle(string $codeType): Response
     {
         $type = $this->entityManager->getReference(Type::class, $codeType);
-        $article = $articleRepository->findOneBy(['type' => $type],['dateAdd'=>'DESC']);
+        $article = $this->articleRepository->findOneBy(['type' => $type],['dateAdd'=>'DESC']);
 
         if (!$article) {
             $this->alertService->info(sprintf('Aucun article de type "%s". Vous avez été rediriger vers la page d\'accueil.', $type->getNom()));
@@ -101,21 +122,4 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/load/ajax', name:'ajax_article', methods:['POST'], options: ['expose' => true])]
-    public function loadArticle(Request $request):Response {
-        $articleRepository= $this->entityManager->getRepository(Article::class);
-
-        if ($request->isXmlHttpRequest()) {
-            $offset = $request->get('offset');
-            $types = $request->get('type');
-            $cond = [];
-            if(!is_null($types) && $types != 'all'){
-                $cond['type']=$types;
-            }
-            $articles = $articleRepository->findBy($cond,['dateAdd' => 'DESC'],10,(10*$offset));
-            return $this->render('article/ajax_article.html.twig',['articles'=>$articles,'typ'=>$types]);
-        }else{
-            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
-        }
-    }
 }
