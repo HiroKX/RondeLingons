@@ -4,11 +4,15 @@ module.exports = {
   content: [
     'templates/**/*.html.twig',
     'assets/js/**/*.js',
-    'assets/js/**/*.jsx', // Si vous utilisez des fichiers React JSX
+    'assets/js/**/*.jsx',
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
+
 }
 

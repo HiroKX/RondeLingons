@@ -117,6 +117,26 @@
   width: 60vw; /* Could be more or less, depending on screen size */
 }
 
+.custom-shape-divider-bottom-1708114205 {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1708114205 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 40px;
+}
+
+.custom-shape-divider-bottom-1708114205 .shape-fill {
+  fill: #FFFFFF;
+}
+
 /* The Close Button */
 .close {
   color: #aaa;
@@ -148,10 +168,6 @@ input, select {
 
 .img-nav {
   width: 100px;
-}
-
-nav {
-  font-size: 1.5em;
 }
 
 .card {

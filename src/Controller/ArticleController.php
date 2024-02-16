@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Dtalist\Type\ArticleDatalistType;
+use App\Datalist\Type\ArticleDatalistType;
 use App\Entity\Article;
 use App\Entity\Type;
 use App\Repository\ArticleRepository;
@@ -12,6 +12,7 @@ use Doctrine\ORM\Exception\ORMException;
 use Leapt\CoreBundle\Datalist\Datalist;
 use Leapt\CoreBundle\Datalist\DatalistFactory;
 use Leapt\CoreBundle\Datalist\Datasource\DoctrineORMDatasource;
+use Leapt\CoreBundle\Paginator\ArrayPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +32,9 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'article_index', methods: ['GET'])]
     public function articles(Request $request): Response
     {
+        $datalist = $this->getDatalist($request);
         return $this->render('article/index.html.twig',[
-            'articles' => $this->getDatalist($request)
+            'articles' => $datalist,
         ]);
     }
 
@@ -54,6 +56,15 @@ class ArticleController extends AbstractController
         $datalist->bind($request);
 
         return $datalist;
+    }
+
+    private function getPaginator(array $datalist, Request $request): ArrayPaginator
+    {
+        $paginator = new ArrayPaginator($datalist);
+        $paginator->setLimitPerPage(5);
+        $paginator->setPage($request->query->getInt('page', 1));
+
+        return $paginator;
     }
 
 
@@ -99,6 +110,7 @@ class ArticleController extends AbstractController
     {
         $type = $this->entityManager->getReference(Type::class, $codeType);
         $article = $this->articleRepository->findOneBy(['type' => $type],['dateAdd'=>'DESC']);
+        $threeRandom = $this->articleRepository->findThreeRandom();
 
         if (!$article) {
             $this->alertService->info(sprintf('Aucun article de type "%s". Vous avez été rediriger vers la page d\'accueil.', $type->getNom()));
@@ -107,6 +119,7 @@ class ArticleController extends AbstractController
 
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'random' => $threeRandom
         ]);
     }
 
@@ -117,8 +130,10 @@ class ArticleController extends AbstractController
     #[Route('/{id}', name: 'article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
+        $threeRandom = $this->articleRepository->findThreeRandom();
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'random' => $threeRandom
         ]);
     }
 

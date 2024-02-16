@@ -22,6 +22,17 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function findThreeRandom()
+    {
+        // Adjust the query depending on your database (MySQL example shown here)
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('RAND()')
+            ->setMaxResults(3)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     public function findByDateDESC()
     {
         return $this->createQueryBuilder('a')

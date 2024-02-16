@@ -4,7 +4,7 @@
                     Articles
                 </span>
     <h1 class="text-3xl font-bold capitalize dark:text-white"> Nos derniers articles</h1>
-    <button class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 m-2 px-4 py-3 text-gray-50 transition-all transform bg-blue-400 duration-300 rounded-[80px] hover:bg-blue-500 dark:hover:text-gray-100 dark:text-gray-100 ">
+    <button class="transition ease-in-out hover:-translate-y-1 hover:scale-110 m-2 px-4 py-3 text-gray-50 transition-all transform bg-blue-400 duration-300 rounded-[80px] hover:bg-blue-500 dark:hover:text-gray-100 dark:text-gray-100 ">
         Voir nos autres articles
     </button>
 </div>
@@ -17,7 +17,7 @@
                     <img class="object-cover w-full h-full mt-6 -ml-6 transition-all rounded hover:scale-110"
                          src="https://i.postimg.cc/qMcFkH9g/pexels-dominika-gregu-ov-478544.jpg" alt="">
                 </div>
-                <div class="relative z-20 flex w-full pt-5 -ml-6">
+                <div class="relative z-20 flex w-full pt-5 -ml-6 group transition-all duration-300 ease-in-out">
                     <div>
                         <img class="object-cover w-20 h-20 mr-4 rounded"
                              src="https://i.postimg.cc/Y049f9k2/pexels-zachary-debottis-3656773.jpg" alt="">
@@ -26,9 +26,9 @@
                             <span class="block mb-2 text-xs font-semibold text-blue-700 uppercase dark:text-blue-300">
                                 {{ article.annee }}
                             </span>
-                        <h2 class="text-base font-bold leading-8 text-black lg:text-xl dark:text-white">
+                        <span class="5 bg-left-bottom bg-gradient-to-r from-blue-500 to-blue-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out text-base font-bold leading-8 text-black lg:text-xl dark:text-white">
                             {{ article.titre }}
-                        </h2>
+                        </span>
                     </div>
                 </div>
             </a>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dtalist\Type;
+namespace App\Datalist\Type;
 
 use App\Entity\Archive;
 use App\Entity\Article;
@@ -33,7 +33,7 @@ class ArticleDatalistType extends DatalistType
     public function buildDatalist(DatalistBuilder $builder, array $options): void
     {
         $builder
-            ->addField('title', TextFieldType::class, [
+            ->addField('titre', TextFieldType::class, [
                 'label' => 'Titre',
             ])
             ->addFilter('title', SearchFilterType::class, [
