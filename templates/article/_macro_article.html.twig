@@ -1,35 +1,81 @@
 {% macro carousel(images) %}
-  <div class="swiper">
-    <div class="swiper-wrapper" style="width: 75%">
-      {% for image in images %}
-        <div class="swiper-slide" style="    overflow: hidden;
+    <div class="swiper">
+        <div class="swiper-wrapper" style="width: 75%">
+            {% for image in images %}
+                <div class="swiper-slide" style="    overflow: hidden;
         height: 700px;
        max-height: 700px;
        position: relative;">
-          <img class="swiper-lazy" style="display: block;
+                    <img class="swiper-lazy" style="display: block;
         width: 100%;
         height: auto;
         position: absolute;
-        bottom: 0;" src="{{asset(pathArticleAttachment ~ image)}}" loading="lazy" alt="{{image}}"/>
-          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+        bottom: 0;" src="{{ asset(pathArticleAttachment ~ image) }}" loading="lazy" alt="{{ image }}"/>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+            {% endfor %}
         </div>
-      {% endfor %}
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
     </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-scrollbar"></div>
-  </div>
 {% endmacro %}
 
 
 {% macro display_image(images) %}
-  {% for image in images %}
-      <a href="#" class="fancylight popup-btn" data-fancybox-group="light">
-        <img src="{{ asset(pathArticleAttachment ~ image) }}" class="img_nogallery w-25">
-      </a>
-  {% endfor %}
-  <div id="my_modal" class="modal">
-    <img id="imagemodal" class="modal-content" src="">
-  </div>
+    {% for image in images %}
+        <a href="#" class="fancylight popup-btn" data-fancybox-group="light">
+            <img src="{{ asset(pathArticleAttachment ~ image) }}" class="img_nogallery w-25">
+        </a>
+    {% endfor %}
+    <div id="my_modal" class="modal">
+        <img id="imagemodal" class="modal-content" src="">
+    </div>
+{% endmacro %}
+
+{% macro article_index(article) %}
+    <a class="flex flex-col flex-wrap mb-0 overflow-hidden rounded lg:flex-row dark:bg-gray-700" href="#">
+        <div class="relative w-full overflow-hidden lg:w-2/4 h-80 ">
+            <img class="object-cover w-full h-full transition-all hover:scale-110"
+                 src="https://i.postimg.cc/Y23w2gc1/pexels-ricardo-esquivel-1586298.jpg" alt="">
+            <span class="absolute px-4 py-2 text-xs text-white bg-blue-500 rounded top-4 left-4">
+                {{ article.type }}
+            </span>
+        </div>
+        <div class="group transition-all duration-300 ease-in-out w-full max-h-72 overflow-hidden relative self-center flex-1 p-8 ml-0 bg-white border rounded shadow dark:border-gray-700 dark:bg-gray-700 lg:items-center lg:-ml-12">
+            <span class="block mb-2 text-xs font-semibold text-blue-700 uppercase dark:text-blue-300">
+                {{ article.annee }}
+            </span>
+            <span class=" bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out mb-3 text-2xl font-bold leading-9 text-black dark:text-white">
+                {{ article.titre }}
+            </span>
+            <p class="text-sm leading-7 text-gray-400">
+                {{ article.utitre }}
+            </p>
+        </div>
+    </a>
+{% endmacro %}
+
+{% macro last_article(article) %}
+    <a class="m-3 bg-white rounded shadow dark:bg-gray-700" href="{{ path('article_show', {'id': article.id}) }}">
+        <div class="relative h-72">
+            <img class="object-cover w-full h-full mt-6 -ml-6 transition-all rounded hover:scale-110"
+                 src="https://i.postimg.cc/qMcFkH9g/pexels-dominika-gregu-ov-478544.jpg" alt="">
+        </div>
+        <div class="relative z-20 flex w-full pt-5 -ml-6 group transition-all duration-300 ease-in-out">
+            <div>
+                <img class="object-cover w-20 h-20 mr-4 rounded"
+                     src="https://i.postimg.cc/Y049f9k2/pexels-zachary-debottis-3656773.jpg" alt="">
+            </div>
+            <div class="flex-1 mb-5">
+                <span class="block mb-2 text-xs font-semibold text-blue-700 uppercase dark:text-blue-300">
+                    {{ article.annee }}
+                </span>
+                <span class="bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out text-base font-bold leading-8 text-black lg:text-xl dark:text-white">
+                    {{ article.titre }}
+                </span>
+            </div>
+        </div>
+    </a>
 {% endmacro %}

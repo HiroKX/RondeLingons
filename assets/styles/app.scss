@@ -16,13 +16,75 @@
 @import './sections/masthead';
 @import './sections/post';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Font Awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 
+.custom-shape-divider-top{
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
 
+.custom-shape-divider-top svg {
+  position: relative;
+  display: block;
+  width: calc(182% + 1.3px);
+  height: 64px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top .shape-fill {
+  fill: #E2E8F0;
+}
+.custom-shape-divider-bottom{
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom svg {
+  position: relative;
+  display: block;
+  width: calc(182% + 1.3px);
+  height: 64px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom .shape-fill {
+  fill: #E2E8F0;
+}
+
+.collapse{
+  visibility: visible;
+}
+.indexArticle {
+}
+
+.titleAbout {
+
+}
+
+.textAbout {
+
+}
+.card-radius{
+  border-radius: 15px;
+}
+.card-img-overlay{
+  top: auto;
+}
 
 .b, .article, .divperso {
   margin: 0 25px;
@@ -32,6 +94,7 @@
   -webkit-box-shadow: 0 13px 40px 14px rgba(0, 0, 0, 0.15);
   box-shadow: 0 13px 40px 14px rgba(0, 0, 0, 0.15);
 }
+
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -41,8 +104,8 @@
   width: 100vw; /* Full width */
   height: 100vh; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
@@ -52,6 +115,26 @@
   padding: 20px;
   border: 1px solid #888;
   width: 60vw; /* Could be more or less, depending on screen size */
+}
+
+.custom-shape-divider-bottom-1708114205 {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1708114205 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 40px;
+}
+
+.custom-shape-divider-bottom-1708114205 .shape-fill {
+  fill: #FFFFFF;
 }
 
 /* The Close Button */
@@ -72,23 +155,22 @@
 .card {
   flex-direction: row;
 }
-.my-icon{
-  width:15%;
-  height:7.5%;
-  padding:10px;
+
+.my-icon {
+  width: 15%;
+  height: 7.5%;
+  padding: 10px;
 }
 
-input, select{
-  display:block;
+input, select {
+  display: block;
 }
+
 .img-nav {
   width: 100px;
 }
-nav{
-  font-size: 1.5em;
-}
 
-.card{
+.card {
   border-radius: 5px;
   margin-bottom: 10px;
   -webkit-box-shadow: 0 13px 40px 14px rgba(0, 0, 0, 0.15);
@@ -99,13 +181,14 @@ nav{
   height: 30px;
   padding: 10px;
 }
-table{
-  border-collapse:collapse;
-  border:1px solid black;
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
 }
 
 
-table th{
+table th {
   font-weight: bold;
 }
 
@@ -118,8 +201,8 @@ table th{
   padding: 10px;
 }
 
-img{
-  width:100%;
+img {
+  width: 100%;
 }
 
 figure.image {

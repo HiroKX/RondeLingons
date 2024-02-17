@@ -19,17 +19,6 @@ class ArchiveController extends AbstractController
     public function __construct(AlertServiceInterface $alertService){
         $this->alertService = $alertService;
     }
-    /**
-     * @param ArchiveRepository $archiveRepository
-     * @return Response
-     */
-    #[Route('/', name: 'archive_index', methods: ['GET'])]
-    public function index(ArchiveRepository $archiveRepository): Response
-    {
-        return $this->render('archive/index.html.twig', [
-            'archives' => $archiveRepository->findByDateDESC(),
-        ]);
-    }
 
     /**
      * @param ArchiveRepository $achiveRepository
@@ -46,9 +35,9 @@ class ArchiveController extends AbstractController
         }
         $article = $articleRepository->findBy(['annee'=> $archive->getId()]);
 
-        return $this->render('archive/show.html.twig', [
-            'archive' => $archive,
-            'articles' => $article
+        return $this->render('article/index.html.twig', [
+            'articles' => $article,
+
         ]);
     }
 

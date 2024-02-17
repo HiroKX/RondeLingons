@@ -1,15 +1,20 @@
-<section>
-    <h3 class="text-center mb-3">Les derniers articles</h3>
-    <div class="row d-sm-block d-lg-flex">
+{% import 'article/_macro_article.html.twig' as article_macro %}
+<div class="text-center">
+                <span
+                        class="block mb-4 text-xs font-semibold leading-4 tracking-widest text-center text-blue-500 uppercase dark:text-gray-400">
+                    Articles
+                </span>
+    <h1 class="text-3xl font-bold capitalize dark:text-white"> Nos derniers articles</h1>
+    <button class="transition ease-in-out hover:-translate-y-1 hover:scale-110 m-2 px-4 py-3 text-gray-50 transition-all transform bg-blue-400 duration-300 rounded-[80px] hover:bg-blue-500 dark:hover:text-gray-100 dark:text-gray-100 ">
+        Voir nos autres articles
+    </button>
+</div>
+<section class="flex items-center dark:bg-gray-800">
+    <div class="pl-12 pr-8 mx-auto lg:px-4 lg:py-4 max-w-7xl">
+        <div class="grid grid-cols-1 gap-4 lg:gap-14 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {% for article in articles %}
-            <article class="col-10 col-lg-4 d-flex flex-column m-auto mb-3">
-                <h2 class="overflow-hidden">{{ article.titre }}</h2>
-                <div class="mt-auto">
-                <small>{{ article.utitre }}</small>
-                <div class="float-end">{{ article.dateAdd|date('d/m/Y') }}</div>
-                </div>
-                <a class="btn btn-outline-primary w-100 mt-auto" href="{{ path('article_show', {'id': article.id}) }}">Lire la suite...</a>
-            </article>
+            {{ article_macro.last_article(article) }}
         {% endfor %}
+        </div>
     </div>
 </section>

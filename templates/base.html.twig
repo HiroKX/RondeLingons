@@ -8,16 +8,15 @@
     {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             {{ ux_controller_link_tags() }}
-        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
     {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body>
+<body class="bg-slate-100 dark:bg-gray-800">
 {% if not app.user %}
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
@@ -28,12 +27,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('index') }}">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('archive_index') }}">Historique</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('article_eng') }}">Engagement</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('article_reg') }}">Règlement</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('archive_doc') }}">Ronde {{ "now"|date("Y") }}</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('contact') }}">Contact</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('article_index') }}">Historique</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('article_eng') }}">Engagement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('article_reg') }}">Règlement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('contact') }}">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -48,13 +46,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-black" href="{{ path('admin') }}">Admin</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('index') }}">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('archive_index') }}">Historique</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_eng') }}">Engagement</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_reg') }}">Règlement</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('archive_doc') }}">Ronde {{ "now"|date("Y") }}</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4  text-black" href="{{ path('contact') }}">Contact</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4 text-black" href="{{ path('admin') }}">Admin</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_index') }}">Historique</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_eng') }}">Engagement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_reg') }}">Règlement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('contact') }}">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -115,31 +112,42 @@
         </div>
     </header>
     {% endif %}
-    <div class="container-fluid">
         {{ include('_flash_message.html.twig') }}
         {% block body %}{% endblock %}
-    </div>
 </body>
-
-<footer class="border-top">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <ul class="list-inline text-center">
-                    <li class="list-inline-item">
-                        <a href="{{ link_fb }}" target="_blank">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="small text-center text-muted fst-italic">Copyright &copy; Made with ♥ {{ "now"|date("Y") }} <a href="{{ path('login') }}">Connexion</a></div>
+<div class="custom-shape-divider-bottom-1708114205">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+    </svg>
+</div>
+<footer class="bg-white dark:bg-gray-900">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="md:flex md:justify-between">
+            <div class="mb-6 md:mb-0">
+                <a href="#" class="flex items-center">
+                    <img src="{{ asset('build/images/img.png') }}" class="h-8 me-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:nav-link">Car2Langres</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                <div>
+                    <h2 class="mb-6 text-base white font-semibold text-gray-900 uppercase dark:nav-link">Suivez-nous !</h2>
+                    <ul class="text-gray-500 dark:text-gray-400 text-base white">
+                        <li class="mb-4">
+                            <a href="{{ link_fb }}" class="hover:underline ">facebook</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="mb-6 text-base white font-semibold text-gray-900 uppercase dark:nav-link">Legal</h2>
+                    <ul class="text-gray-500 dark:text-gray-400 text-base white">
+                        <li>
+                            <a href="#" class="hover:underline">Conditions générales d'utilisation</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </footer>
-<script async src="https://umami.ronde-lingons.fr/script.js" data-website-id="f55f1deb-5348-49c3-bf55-61c7e01d262c"></script>
 </html>

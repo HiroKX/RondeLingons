@@ -13,6 +13,8 @@ global.$ = global.jQuery = $;
 import '@popperjs/core';
 require('bootstrap');
 
+import '../node_modules/flowbite/dist/flowbite.min.js';
+
 const routes = require('../public/js/fos_js_routes.json');
 import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 Routing.setRoutingData(routes);
@@ -52,48 +54,5 @@ window.addEventListener('scroll', function() {
     }
     scrollPos = currentTop;
 });
-
-
-$('#btn-load').click(loadArticle);
-
-$('#selector-type').change(load)
-
-let explicitData = {}
-let reload=false;
-
-function load(){
-    if($('#selector-type option:checked') !== 'all'){
-        explicitData.type=$('#selector-type option:checked').val()
-    }
-    else{
-        explicitData = {}
-    }
-    nbLoad=0
-    reload=true
-    loadArticle()
-}
-
-
-function loadArticle() {
-    explicitData.offset = nbLoad
-    $.ajax({
-        url: Routing.generate('ajax_article'),
-        type: 'POST',
-        async: true,
-        data: explicitData,
-        success: function (dataReturned, status) {
-            if (reload) {
-                $('#containerArticle').html(dataReturned);
-                reload=false;
-            } else {
-                $('#containerArticle').append(dataReturned);
-            }
-            nbLoad++;
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.error('Erreur de chargement...');
-        }
-    });
-}
 
 

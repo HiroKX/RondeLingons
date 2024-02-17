@@ -1,20 +1,36 @@
 {% extends 'base.html.twig' %}
 
+{% import 'article/_macro_article.html.twig' as article_macro %}
 {% block body %}
-<div class="mx-auto col-12 col-lg-9">
-    {{ render(controller('App\\Controller\\IndexController::lastArticle')) }}
-    <hr class="my-4" />
-    <div class="w-50 mx-auto bg-light mb-2" >
-        <select class="btn btn-default mx-auto w-100 dropdown-toggle" id="selector-type" data-toggle="dropdown">
-            <option value="all">Tous</option>
-            {% for type in types %}
-                <option value="{{ type.code }}">{{ type.nom }}</option>
-            {% endfor %}
-        </select>
+    {% include 'article/_article_widget.html.twig' with {'articles':articles} %}
+    <!-- drawer component -->
+    <div id="drawer"
+         class="fixed border-r-8 border-blue-400 top-0 left-0 z-[1031] h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800"
+         tabindex="-1" aria-labelledby="drawer">
+        <button type="button" data-drawer-hide="drawer"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close menu</span>
+        </button>
+        {{ datalist_filters(articles) }}
     </div>
-    <div class="row" id="containerArticle" >
-        {{ include('article/ajax_article.html.twig', {'articles': articles}) }}
+    {% include 'divider/top.html.twig' %}
+    <div class="items-center justify-center">
+        <div class="flex-wrap">
+            <section class="flex bg-slate-200 dark:bg-gray-800">
+                <div class="p-4 mx-auto sm:w-full xl:w-3/4">
+                    <div class="grid grid-cols-1 gap-4 lg:gap-8 sm:gap-4 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3">
+                        {% for article in articles %}
+                            {{ article_macro.article_index(article) }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-    <button class="btn btn-outline-primary d-block mx-auto" id="btn-load">Charger plus d'articles</button>
-</div>
+    {% include 'divider/bot.html.twig' %}
+    {% include 'article/_article_widget.html.twig' with {'articles':articles} %}
 {% endblock %}
