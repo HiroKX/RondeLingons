@@ -28,7 +28,6 @@
     .navbar-nav {
         >li.nav-item {
             >a.nav-link {
-                font-size: 0.75rem;
                 font-weight: $headings-font-weight;
                 letter-spacing: 0.0625em;
                 text-transform: uppercase;
@@ -84,7 +83,7 @@
         &.is-fixed {
             /* when the user scrolls down, we hide the header right above the viewport */
             position: fixed;
-            top: -83px;
+            top: -90px;
             -webkit-transition: -webkit-transform 0.2s;
             -moz-transition: -moz-transform 0.2s;
             transition: transform 0.2s;

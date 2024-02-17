@@ -1,0 +1,11 @@
+<div class="flex sm:flex-row flex-wrap justify-content-evenly">
+    <div class="sm:mt-0 mt-2 mb-2">
+        <button data-drawer-body-scrolling="true"
+                class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="button" data-drawer-target="drawer" data-drawer-show="drawer" aria-controls="drawer">
+            Filtrer
+        </button>
+    </div>
+    <div class="sm:mt-0 mt-2">{{ paginator_widget(articles.getPaginator()) }}</div>
+    <div class="sm:mt-0 mt-2">{{ articles.getPaginator().count }} article(s) trouvé(s)</div>
+</div>

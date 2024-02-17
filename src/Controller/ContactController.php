@@ -33,8 +33,8 @@ class ContactController extends AbstractController
             $message = (new Email())
                 ->from($this->getParameter('sender.email'))
                 ->to($this->getParameter('receiver.email'))
-                ->subject('Contact web')
-                ->text('Depuis : '.$contactFormData['email'].\PHP_EOL.
+                ->subject('Demande de contact : '. $contactFormData['sujet'])
+                ->text('Depuis : '.$contactFormData['email'].' de la part de : '.$contactFormData['prenom'].' '.$contactFormData['nom'].\PHP_EOL.
                     $contactFormData['message'],
                     'text/plain');
             try{

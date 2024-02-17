@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Datalist\Type\ArticleDatalistType;
 use App\Entity\Article;
 use App\Entity\Type;
+use App\Repository\ArchiveRepository;
 use App\Repository\ArticleRepository;
 use App\Service\AlertServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,6 +38,7 @@ class ArticleController extends AbstractController
             'articles' => $datalist,
         ]);
     }
+
 
     private function getDatalist(Request $request): Datalist
     {

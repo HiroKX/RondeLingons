@@ -35,9 +35,9 @@ class ArchiveController extends AbstractController
         }
         $article = $articleRepository->findBy(['annee'=> $archive->getId()]);
 
-        return $this->render('archive/show.html.twig', [
-            'archive' => $archive,
-            'articles' => $article
+        return $this->render('article/index.html.twig', [
+            'articles' => $article,
+
         ]);
     }
 

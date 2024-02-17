@@ -1,3 +1,4 @@
+{% import 'article/_macro_article.html.twig' as article_macro %}
 <div class="text-center">
                 <span
                         class="block mb-4 text-xs font-semibold leading-4 tracking-widest text-center text-blue-500 uppercase dark:text-gray-400">
@@ -12,26 +13,7 @@
     <div class="pl-12 pr-8 mx-auto lg:px-4 lg:py-4 max-w-7xl">
         <div class="grid grid-cols-1 gap-4 lg:gap-14 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {% for article in articles %}
-            <a class="m-3 bg-white rounded shadow dark:bg-gray-700"  href="{{ path('article_show', {'id': article.id}) }}">
-                <div class="relative h-72">
-                    <img class="object-cover w-full h-full mt-6 -ml-6 transition-all rounded hover:scale-110"
-                         src="https://i.postimg.cc/qMcFkH9g/pexels-dominika-gregu-ov-478544.jpg" alt="">
-                </div>
-                <div class="relative z-20 flex w-full pt-5 -ml-6 group transition-all duration-300 ease-in-out">
-                    <div>
-                        <img class="object-cover w-20 h-20 mr-4 rounded"
-                             src="https://i.postimg.cc/Y049f9k2/pexels-zachary-debottis-3656773.jpg" alt="">
-                    </div>
-                    <div class="flex-1 mb-5">
-                            <span class="block mb-2 text-xs font-semibold text-blue-700 uppercase dark:text-blue-300">
-                                {{ article.annee }}
-                            </span>
-                        <span class="5 bg-left-bottom bg-gradient-to-r from-blue-500 to-blue-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out text-base font-bold leading-8 text-black lg:text-xl dark:text-white">
-                            {{ article.titre }}
-                        </span>
-                    </div>
-                </div>
-            </a>
+            {{ article_macro.last_article(article) }}
         {% endfor %}
         </div>
     </div>
