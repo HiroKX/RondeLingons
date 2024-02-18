@@ -41,7 +41,7 @@ class ArticleCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     "multiple" => true,
                     "attr" => [
-                        "accept" => "image/x-png,image/pdg,image/jpeg,application/pdf"
+                        "accept" => "image/x-png,image/pdg,image/jpeg,application/pdf,application/zip,application/x-zip,application/x-zip-compressed,application/octet-stream"
                     ],
                 ])
                 ->setBasePath('uploads/')
