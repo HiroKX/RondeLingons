@@ -29,6 +29,9 @@ class Type
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Article::class, orphanRemoval: true)]
     private Collection $articles;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     #[Pure]
     public function __construct()
     {
@@ -111,6 +114,18 @@ class Type
                 $article->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

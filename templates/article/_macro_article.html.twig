@@ -1,24 +1,65 @@
 {% macro carousel(images) %}
-    <div class="swiper">
-        <div class="swiper-wrapper" style="width: 75%">
-            {% for image in images %}
-                <div class="swiper-slide" style="    overflow: hidden;
-        height: 700px;
-       max-height: 700px;
+    <div class="hidden sm:block">
+        <div class="swiper">
+            <div class="swiper-wrapper" style="">
+                {% for image in images %}
+                    <div class="swiper-slide" style="overflow: hidden;
+                height:70vh;
+        max-height: 100vh;
        position: relative;">
-                    <img class="swiper-lazy" style="display: block;
+                        <img class="swiper-lazy" onclick="showModal('{{ asset(pathArticleAttachment ~ image) }}')" style="display: block;
         width: 100%;
         height: auto;
         position: absolute;
         bottom: 0;" src="{{ asset(pathArticleAttachment ~ image) }}" loading="lazy" alt="{{ image }}"/>
-                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    <div id="modal"
+         class="hidden fixed top-0 left-0 z-[1031] w-screen h-screen bg-black/70 flex justify-center items-center">
+
+        <!-- The close button -->
+        <a class="fixed z-90 top-6 right-8 text-white text-5xl font-bold" href="javascript:void(0)"
+           onclick="closeModal()">&times;</a>
+
+        <!-- A big image will be displayed here -->
+        <img id="modal-img" class="max-w-[80vw] max-h-[80vh] object-contain" />
+    </div>
+    <script>
+        // Get the modal by id
+        var modal = document.getElementById("modal");
+
+        // Get the modal image tag
+        var modalImg = document.getElementById("modal-img");
+
+        // this function is called when a small image is clicked
+        function showModal(src) {
+            modal.classList.remove('hidden');
+            modalImg.src = src;
+        }
+
+        // this function is called when the close button is clicked
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+    </script>
+    <div class="block sm:hidden">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {% for image in images %}
+                <div>
+                    <img class="object-cover object-center w-full max-w-full rounded-lg"
+                         src="{{ asset(pathArticleAttachment ~ image) }}" loading="lazy"
+                         alt="gallery-photo" />
                 </div>
             {% endfor %}
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-scrollbar"></div>
     </div>
 {% endmacro %}
 
@@ -35,10 +76,11 @@
 {% endmacro %}
 
 {% macro article_index(article) %}
-    <a class="flex flex-col flex-wrap mb-0 overflow-hidden rounded lg:flex-row dark:bg-gray-700" href="#">
+    <a class="flex flex-col flex-wrap mb-0 overflow-hidden rounded lg:flex-row dark:bg-gray-700"
+       href="{{ path('article_show', {'id': article.id}) }}">
         <div class="relative w-full overflow-hidden lg:w-2/4 h-80 ">
             <img class="object-cover w-full h-full transition-all hover:scale-110"
-                 src="https://i.postimg.cc/Y23w2gc1/pexels-ricardo-esquivel-1586298.jpg" alt="">
+                 src="{{ asset('uploads/' ~ article.type.image) }}" alt="">
             <span class="absolute px-4 py-2 text-xs text-white bg-blue-500 rounded top-4 left-4">
                 {{ article.type }}
             </span>
@@ -61,12 +103,12 @@
     <a class="m-3 bg-white rounded shadow dark:bg-gray-700" href="{{ path('article_show', {'id': article.id}) }}">
         <div class="relative h-72">
             <img class="object-cover w-full h-full mt-6 -ml-6 transition-all rounded hover:scale-110"
-                 src="https://i.postimg.cc/qMcFkH9g/pexels-dominika-gregu-ov-478544.jpg" alt="">
+                 src="{{ asset('uploads/' ~ article.type.image) }}" alt="">
         </div>
         <div class="relative z-20 flex w-full pt-5 -ml-6 group transition-all duration-300 ease-in-out">
             <div>
                 <img class="object-cover w-20 h-20 mr-4 rounded"
-                     src="https://i.postimg.cc/Y049f9k2/pexels-zachary-debottis-3656773.jpg" alt="">
+                     src="{{ asset('uploads/' ~ article.type.image) }}" alt="">
             </div>
             <div class="flex-1 mb-5">
                 <span class="block mb-2 text-xs font-semibold text-blue-700 uppercase dark:text-blue-300">

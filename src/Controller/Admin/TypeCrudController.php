@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -37,6 +38,16 @@ class TypeCrudController extends AbstractCrudController
         return [
             TextField::new('code'),
             TextField::new('nom'),
+            ImageField::new('image')
+                ->setFormTypeOptions([
+                    "multiple" => false,
+                    "attr" => [
+                        "accept" => "image/x-png,image/pdg,image/jpeg"
+                    ],
+                ])
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern("[randomhash].[extension]"),
             ];
     }
 

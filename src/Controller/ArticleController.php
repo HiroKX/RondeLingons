@@ -60,16 +60,6 @@ class ArticleController extends AbstractController
         return $datalist;
     }
 
-    private function getPaginator(array $datalist, Request $request): ArrayPaginator
-    {
-        $paginator = new ArrayPaginator($datalist);
-        $paginator->setLimitPerPage(5);
-        $paginator->setPage($request->query->getInt('page', 1));
-
-        return $paginator;
-    }
-
-
     /**
      * @param string $pathAttachmentArticle
      * @return Response

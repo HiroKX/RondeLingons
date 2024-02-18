@@ -6,8 +6,8 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('build/images/img.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            {{ ux_controller_link_tags() }}
+        {{ encore_entry_link_tags('app') }}
+        {{ ux_controller_link_tags() }}
     {% endblock %}
 
     {% block javascripts %}
@@ -20,18 +20,24 @@
 {% if not app.user %}
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo" />
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo"/>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('index') }}">Accueil</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('article_index') }}">Historique</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('article_eng') }}">Engagement</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('article_reg') }}">Règlement</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4" href="{{ path('contact') }}">Contact</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4"
+                                            href="{{ path('index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4"
+                                            href="{{ path('article_index') }}">Historique</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4"
+                                            href="{{ path('article_eng') }}">Engagement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4"
+                                            href="{{ path('article_reg') }}">Reglement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4"
+                                            href="{{ path('contact') }}">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -39,19 +45,26 @@
 {% else %}
     <nav class="navbar navbar-light navbar-expand-lg position-relative" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo" />
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo"/>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4 text-black" href="{{ path('admin') }}">Admin</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('index') }}">Accueil</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_index') }}">Historique</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_eng') }}">Engagement</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('article_reg') }}">Règlement</a></li>
-                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black" href="{{ path('contact') }}">Contact</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4 text-black"
+                                            href="{{ path('admin') }}">Admin</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black"
+                                            href="{{ path('index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black"
+                                            href="{{ path('article_index') }}">Historique</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black"
+                                            href="{{ path('article_eng') }}">Engagement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black"
+                                            href="{{ path('article_reg') }}">Reglement</a></li>
+                    <li class="nav-item"><a class="text-base nav-link font-extrabold px-lg-3 py-3 py-lg-4  text-black"
+                                            href="{{ path('contact') }}">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -61,7 +74,8 @@
 {% if not app.user %}
     <header class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="masthead carousel-item active" style="background-image: url({{ asset('build/images/imgCarousel1.jpg') }})">
+            <div class="masthead carousel-item active"
+                 style="background-image: url({{ asset('build/images/imgCarousel1.jpg') }})">
                 <div class="container position-relative px-4 px-lg-5 legend">
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
@@ -73,7 +87,8 @@
                     </div>
                 </div>
             </div>
-            <div class="masthead carousel-item" style="background-image: url({{ asset('build/images/imgCarousel2.jpeg') }})">
+            <div class="masthead carousel-item"
+                 style="background-image: url({{ asset('build/images/imgCarousel2.jpg') }})">
                 <div class="container position-relative px-4 px-lg-5 legend">
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
@@ -85,19 +100,8 @@
                     </div>
                 </div>
             </div>
-            <div class="masthead carousel-item" style="background-image: url({{ asset('build/images/imgCarousel3.jpg') }})">
-                <div class="container position-relative px-4 px-lg-5 legend">
-                    <div class="row gx-4 gx-lg-5 justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                            <div class="site-heading">
-                                <h1>La Ronde des Lingons</h1>
-                                <span class="subheading">Rallye Historique</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masthead carousel-item" style="background-image: url({{ asset('build/images/imgCarousel4.jpg') }})">
+            <div class="masthead carousel-item"
+                 style="background-image: url({{ asset('build/images/imgCarousel3.jpg') }})">
                 <div class="container position-relative px-4 px-lg-5 legend">
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
@@ -111,13 +115,33 @@
             </div>
         </div>
     </header>
-    {% endif %}
-        {{ include('_flash_message.html.twig') }}
-        {% block body %}{% endblock %}
+{% endif %}
+<button
+        type="button"
+        data-te-ripple-init
+        data-te-ripple-color="light"
+        class="!fixed bottom-5 z-[1031] right-5 hidden rounded-full bg-blue-500 p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+        id="btn-back-to-top">
+    <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            class="h-4 w-4"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512">
+        <path
+                fill="currentColor"
+                d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path>
+    </svg>
+</button>
+{{ include('_flash_message.html.twig') }}
+{% block body %}{% endblock %}
 </body>
 <div class="custom-shape-divider-bottom-1708114205">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              class="shape-fill"></path>
     </svg>
 </div>
 <footer class="bg-white dark:bg-gray-900">
@@ -125,13 +149,14 @@
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
                 <a href="#" class="flex items-center">
-                    <img src="{{ asset('build/images/img.png') }}" class="h-8 me-3" alt="Logo" />
+                    <img src="{{ asset('build/images/img.png') }}" class="object-contain w-20 h-20 mr-4" alt="Logo"/>
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:nav-link">Car2Langres</span>
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                 <div>
-                    <h2 class="mb-6 text-base white font-semibold text-gray-900 uppercase dark:nav-link">Suivez-nous !</h2>
+                    <h2 class="mb-6 text-base white font-semibold text-gray-900 uppercase dark:nav-link">Suivez-nous
+                        !</h2>
                     <ul class="text-gray-500 dark:text-gray-400 text-base white">
                         <li class="mb-4">
                             <a href="{{ link_fb }}" class="hover:underline ">facebook</a>
