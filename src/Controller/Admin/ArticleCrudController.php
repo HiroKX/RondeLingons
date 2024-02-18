@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Form\AttachmentType;
 use App\Form\MultipleAttachmentType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -23,12 +24,16 @@ class ArticleCrudController extends AbstractCrudController
         return Article::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->setDefaultSort(['annee'=>'DESC']);
+    }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('type','Type d\'article'),
-            AssociationField::new('annee','Edition'),
+            AssociationField::new('type','Type d\'article')->autocomplete(),
+            AssociationField::new('annee','Edition')->setSortProperty('annee')->autocomplete(),
             TextField::new('titre'),
             TextField::new('utitre','Sous-titre'),
             TextEditorField::new('contenu','Contenu'),
@@ -41,7 +46,7 @@ class ArticleCrudController extends AbstractCrudController
                 ])
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
-                ->setUploadedFileNamePattern("[randomhash].[extension]"),
+                ->setUploadedFileNamePattern("/[timestamp]_[slug].[extension]"),
             ImageField::new('images')
                 ->setFormTypeOptions([
                     "multiple" => true,
@@ -51,7 +56,7 @@ class ArticleCrudController extends AbstractCrudController
                 ])
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
-                ->setUploadedFileNamePattern("[randomhash].[extension]"),
+                ->setUploadedFileNamePattern("/[timestamp]_[slug].[extension]"),
             ImageField::new('imagesGallery')
                 ->setFormTypeOptions([
                     "multiple" => true,
@@ -61,7 +66,7 @@ class ArticleCrudController extends AbstractCrudController
                 ])
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
-                ->setUploadedFileNamePattern("[randomhash].[extension]"),
+                ->setUploadedFileNamePattern("/[timestamp]_[slug].[extension]"),
         ];
     }
 
