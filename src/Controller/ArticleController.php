@@ -39,7 +39,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-
     private function getDatalist(Request $request): Datalist
     {
         $queryBuilder = $this->articleRepository->createQueryBuilder('n')

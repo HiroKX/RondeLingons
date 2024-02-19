@@ -20,7 +20,9 @@
 {% if not app.user %}
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <img class="navbar-brand img-nav" src="{{ asset('build/images/img.png') }}" alt="logo"/>
+            <div>
+                <img class="navbar-brand img-nav bg-white" src="{{ asset('build/images/img.png') }}" alt="logo"/>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -80,7 +82,7 @@
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <div class="site-heading">
-                                <h1>La Ronde des Lingons</h1>
+                                <h1 class="uppercase">La Ronde des Lingons</h1>
                                 <span class="subheading">Rallye Historique</span>
                             </div>
                         </div>
@@ -93,7 +95,7 @@
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <div class="site-heading">
-                                <h1>La Ronde des Lingons</h1>
+                                <h1 class="uppercase">La Ronde des Lingons</h1>
                                 <span class="subheading">Rallye Historique</span>
                             </div>
                         </div>
@@ -106,7 +108,7 @@
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <div class="site-heading">
-                                <h1>La Ronde des Lingons</h1>
+                                <h1 class="uppercase">La Ronde des Lingons</h1>
                                 <span class="subheading">Rallye Historique</span>
                             </div>
                         </div>
@@ -159,7 +161,7 @@
                         !</h2>
                     <ul class="text-gray-500 dark:text-gray-400 text-base white">
                         <li class="mb-4">
-                            <a href="{{ link_fb }}" class="hover:underline ">facebook</a>
+                            <a href="{{ link_fb }}" class="hover:underline ">Facebook</a>
                         </li>
                     </ul>
                 </div>
