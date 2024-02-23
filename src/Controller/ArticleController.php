@@ -66,6 +66,8 @@ class ArticleController extends AbstractController
     #[Route('/download/attachment/{filename}', name: 'article_download_attachment')]
     public function downloadAttachment(String $filename): Response
     {
+        if(str_starts_with($filename,'/'))
+            return $this->file('uploads' . $filename);
         return $this->file('uploads/' . $filename);
     }
 
