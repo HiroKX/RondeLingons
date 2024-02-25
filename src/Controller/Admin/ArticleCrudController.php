@@ -46,7 +46,7 @@ class ArticleCrudController extends AbstractCrudController
                 ])
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
-                ->setUploadedFileNamePattern("/[timestamp]_[slug].[extension]"),
+                ->setUploadedFileNamePattern("[timestamp]_[slug].[extension]"),
             ImageField::new('images')
                 ->setFormTypeOptions([
                     "multiple" => true,

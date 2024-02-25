@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Datalist\Type\ArticleDatalistType;
 use App\Entity\Article;
 use App\Entity\Type;
-use App\Repository\ArchiveRepository;
 use App\Repository\ArticleRepository;
 use App\Service\AlertServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +12,6 @@ use Doctrine\ORM\Exception\ORMException;
 use Leapt\CoreBundle\Datalist\Datalist;
 use Leapt\CoreBundle\Datalist\DatalistFactory;
 use Leapt\CoreBundle\Datalist\Datasource\DoctrineORMDatasource;
-use Leapt\CoreBundle\Paginator\ArrayPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,18 +21,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
 
-    public function __construct(private ArticleRepository $articleRepository,private AlertServiceInterface $alertService, private readonly DatalistFactory $datalistFactory, private EntityManagerInterface $entityManager){
+    public function __construct(private readonly ArticleRepository $articleRepository, private readonly AlertServiceInterface $alertService, private readonly DatalistFactory $datalistFactory, private readonly EntityManagerInterface $entityManager)
+    {
     }
 
     /**
-     * @param ArticleRepository $articleRepository
+     * @param Request $request
      * @return Response
      */
     #[Route('/', name: 'article_index', methods: ['GET'])]
     public function articles(Request $request): Response
     {
         $datalist = $this->getDatalist($request);
-        return $this->render('article/index.html.twig',[
+        return $this->render('article/index.html.twig', [
             'articles' => $datalist,
         ]);
     }
@@ -42,7 +41,7 @@ class ArticleController extends AbstractController
     private function getDatalist(Request $request): Datalist
     {
         $queryBuilder = $this->articleRepository->createQueryBuilder('n')
-        ->orderBy('n.dateAdd', 'DESC');
+            ->orderBy('n.dateAdd', 'DESC');
 
         $datalist = $this->datalistFactory
             ->createBuilder(ArticleDatalistType::class, [
@@ -60,19 +59,20 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @param string $pathAttachmentArticle
+     * @param Article $article
+     * @param string $id
      * @return Response
      */
-    #[Route('/download/attachment/{filename}', name: 'article_download_attachment')]
-    public function downloadAttachment(String $filename): Response
+    #[Route('/download/attachment/{article}/{id}', name: 'article_download_attachment')]
+    public function downloadAttachment(Article $article, string $id): Response
     {
-        if(str_starts_with($filename,'/'))
+        $filename = $article->getFiles()[$id];
+        if (str_starts_with($filename, '/'))
             return $this->file('uploads' . $filename);
         return $this->file('uploads/' . $filename);
     }
 
     /**
-     * @param ArticleRepository $articleRepository
      * @return Response
      * @throws ORMException
      */
@@ -83,7 +83,6 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @param ArticleRepository $articleRepository
      * @return Response
      * @throws ORMException
      */
@@ -95,14 +94,13 @@ class ArticleController extends AbstractController
 
     /**
      * @param string $codeType
-     * @param ArticleRepository $articleRepository
      * @return Response
      * @throws ORMException
      */
     private function showArticle(string $codeType): Response
     {
         $type = $this->entityManager->getReference(Type::class, $codeType);
-        $article = $this->articleRepository->findOneBy(['type' => $type],['dateAdd'=>'DESC']);
+        $article = $this->articleRepository->findOneBy(['type' => $type], ['dateAdd' => 'DESC']);
         $threeRandom = $this->articleRepository->findThreeRandom();
 
         if (!$article) {
