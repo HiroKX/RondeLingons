@@ -35,9 +35,9 @@ class ArticleCrudController extends AbstractCrudController
             AssociationField::new('type','Type d\'article')->autocomplete(),
             AssociationField::new('annee','Edition')->setSortProperty('annee')->autocomplete(),
             TextField::new('titre'),
-            TextField::new('utitre','Sous-titre'),
-            TextEditorField::new('contenu','Contenu'),
-            ImageField::new('files')
+            TextField::new('utitre','Sous-titre')->setRequired(false),
+            TextEditorField::new('contenu','Contenu')->setRequired(false),
+            ImageField::new('files','Fichiers')
                 ->setFormTypeOptions([
                     "multiple" => true,
                     "attr" => [
@@ -47,7 +47,7 @@ class ArticleCrudController extends AbstractCrudController
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
                 ->setUploadedFileNamePattern("[timestamp]_[slug].[extension]"),
-            ImageField::new('images')
+            ImageField::new('images','Images')
                 ->setFormTypeOptions([
                     "multiple" => true,
                     "attr" => [
@@ -57,7 +57,7 @@ class ArticleCrudController extends AbstractCrudController
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
                 ->setUploadedFileNamePattern("/[timestamp]_[slug].[extension]"),
-            ImageField::new('imagesGallery')
+            ImageField::new('imagesGallery','Gallerie d\'images')
                 ->setFormTypeOptions([
                     "multiple" => true,
                     "attr" => [

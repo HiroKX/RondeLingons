@@ -13,7 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 class ArchiveCrudController extends AbstractCrudController
 {
 
-    use NoDeleteAndDetail;
+    use NoDetail;
 
     public static function getEntityFqcn(): string
     {

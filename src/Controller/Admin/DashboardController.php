@@ -84,7 +84,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('NewRonde');
+            ->setTitle('Ronde Des Lingons')
+	        ->renderContentMaximized();
     }
 
     public function configureMenuItems(): iterable
@@ -93,6 +94,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Types d\'articles','fa fa-article', Type::class);
         yield MenuItem::linkToCrud('Archives','fa fa-article', Archive::class);
         yield MenuItem::linkToRoute('Revenir à l\'accueil','fa fa-article','index');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
