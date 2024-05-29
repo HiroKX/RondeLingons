@@ -42,7 +42,6 @@ class ArticleDatalistType extends DatalistType
             ])
             ->addFilter('type', EntityFilterType::class, [
                 'class' => Type::class,
-				'autocomplete' => true,
                 'property_path' => 'n.type',
                 'label' => 'Type d\'article',
                 'query_builder' => function (TypeRepository $er) {

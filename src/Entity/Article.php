@@ -26,10 +26,10 @@ class Article
     private string $titre;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $utitre;
+    private ?string $utitre;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private string $contenu;
+    private ?string $contenu;
 
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'articles')]
     #[ORM\JoinColumn(name: "type_code", referencedColumnName: "code", nullable: false)]
